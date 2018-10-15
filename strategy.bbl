@@ -1,0 +1,32 @@
+\begin{thebibliography}{5}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{{Buton} {et~al.}(2013){Buton}, {Copin}, {Aldering}, {Antilogus},
+  {Aragon}, {Bailey}, {Baltay}, {Bongard}, {Canto}, {Cellier-Holzem},
+  {Childress}, {Chotard}, {Fakhouri}, {Gangler}, {Guy}, {Hsiao}, {Kerschhaggl},
+  {Kowalski}, {Loken}, {Nugent}, {Paech}, {Pain}, {P{\'e}contal}, {Pereira},
+  {Perlmutter}, {Rabinowitz}, {Rigault}, {Runge}, {Scalzo}, {Smadja}, {Tao},
+  {Thomas}, {Weaver}, {Wu}, \& {Nearby SuperNova Factory}}]{buton}
+{Buton}, C., {Copin}, Y., {Aldering}, G., {et~al.} 2013, \aap, 549, A8
+
+\bibitem[{Michael W.~Coughlin(2018)}]{coughlin}
+Michael W.~Coughlin, Susana~Deustua, A. G. N. M. J. P. R. C. W. S. J. T.~W.
+  2018, Testing of the LSST's photometric calibration strategy at the CTIO 0.9
+  meter telescope
+
+\bibitem[{{P{\'e}rez-Jord{\'a}n} {et~al.}(2018){P{\'e}rez-Jord{\'a}n},
+  {Castro-Almaz{\'a}n}, \& {Mu{\~n}oz-Tu{\~n}{\'o}n}}]{2018MNRAS.477.5477P}
+{P{\'e}rez-Jord{\'a}n}, w., {Castro-Almaz{\'a}n}, J.~A., \&
+  {Mu{\~n}oz-Tu{\~n}{\'o}n}, C. 2018, \mnras, 477, 5477
+
+\bibitem[{Randles {et~al.}(2017)}]{randles}
+Randles, C. {et~al.} 2017, The MERRA-2 Aerosol Reanalysis, 1980 Onward. Part I:
+  System Description and Data Assimilation Evaluation
+
+\bibitem[{Ziemke {et~al.}(2014)Ziemke, Olsen, Witte, Douglass, Strahan, Wargan,
+  Liu, Schoeberl, Yang, Kaplan, Pawson, Duncan, Newman, Bhartia, \&
+  Heney}]{doi:10.1002/2013JD020914}
+Ziemke, J.~R., Olsen, M.~A., Witte, J.~C., {et~al.} 2014, Journal of
+  Geophysical Research: Atmospheres, 119, 5671
+
+\end{thebibliography}
