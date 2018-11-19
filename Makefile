@@ -1,4 +1,4 @@
-main=report
+main=strategy
 all : $(main).pdf
 
 RERUN="(There were undefined references|Rerun to get (cross-references|the bars) right|Rerun to get citations correct|rerunfilecheck .* has changed)"
