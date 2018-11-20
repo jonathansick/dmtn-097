@@ -1,26 +1,41 @@
-main=strategy
-all : $(main).pdf
+DOCTYPE = DMTN
+DOCNUMBER = 097
+DOCNAME = $(DOCTYPE)-$(DOCNUMBER)
 
-RERUN="(There were undefined references|Rerun to get (cross-references|the bars) right|Rerun to get citations correct|rerunfilecheck .* has changed)"
+GITVERSION := $(shell git log -1 --date=short --pretty=%h)
+GITDATE := $(shell git log -1 --date=short --pretty=%ad)
+GITSTATUS := $(shell git status --porcelain)
+ifneq "$(GITSTATUS)" ""
+	GITDIRTY = -dirty
+endif
 
-%.pdf : %.tex *.tex biblio.bib Makefile
-	rm -f $*.bbl
-	pdflatex $<
-	bibtex $*
-	@egrep -q $(RERUN) $*.log && pdflatex $< ; true
-	@egrep -q $(RERUN) $*.log && pdflatex $< ; true
-	@egrep -q $(RERUN) $*.log && pdflatex $< ; true
+export TEXMFHOME = lsst-texmf/texmf
 
+$(DOCNAME).pdf: $(DOCNAME).tex meta.tex
+	xelatex $(DOCNAME)
+	bibtex $(DOCNAME)
+	xelatex $(DOCNAME)
+	xelatex $(DOCNAME)
+
+.PHONY: clean
 clean:
-	rm -f *.log *.lof *.aux *.blg *.out $(main).pdf *.synctex.gz *.bbl *.brf *.toc
+	rm -f DMTN-097.aux
+	rm -f DMTN-097.bbl
+	rm -f DMTN-097.blg
+	rm -f DMTN-097.log
+	rm -f DMTN-097.out
+	rm -f DMTN-097.pdf
+	rm -f DMTN-097.rec
+	rm -f DMTN-097.toc
+	rm -f meta.tex
 
+.FORCE:
 
-aa-sub :
-	make $(main).pdf
-	toto=$(main)-referee;\
-	rm -f $${toto}.tex;\
-	sed 's/\documentclass\[twocolumn\]{aa}/\documentclass[referee]{aa}/' $(main).tex > $${toto}.tex;\
-	make $${toto}.pdf;\
-	rm -f `ls $${toto}* | grep -v pdf`
-#	make answer_to_referee.pdf 
-
+meta.tex: Makefile .FORCE
+	rm -f $@
+	touch $@
+	echo '% GENERATED FILE -- edit this in the Makefile' >>$@
+	/bin/echo '\newcommand{\lsstDocType}{$(DOCTYPE)}' >>$@
+	/bin/echo '\newcommand{\lsstDocNum}{$(DOCNUMBER)}' >>$@
+	/bin/echo '\newcommand{\vcsRevision}{$(GITVERSION)$(GITDIRTY)}' >>$@
+	/bin/echo '\newcommand{\vcsDate}{$(GITDATE)}' >>$@

@@ -1,0 +1,14 @@
+DMTN-*.aux
+DMTN-*.bbl
+DMTN-*.blg
+DMTN-*.glg
+DMTN-*.glo
+DMTN-*.gls
+DMTN-*.ist
+DMTN-*.log
+DMTN-*.out
+DMTN-*.pdf
+DMTN-*.rec
+DMTN-*.toc
+meta.tex
+*.swp

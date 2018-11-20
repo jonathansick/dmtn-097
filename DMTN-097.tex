@@ -1,59 +1,36 @@
-\documentclass[onecolumn]{aa}
-\usepackage[utf8]{inputenc}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{nccmath}
-\usepackage{amsmath}
-\usepackage{natbib}
-\usepackage{graphicx}
-\usepackage{txfonts}
-\usepackage{textcomp}
-\usepackage{subfigure}
-\usepackage[pagebackref,colorlinks,citecolor=blue,urlcolor=blue,linkcolor=blue]{hyperref}
-%\usepackage[pagebackref,colorlinks,citecolor=blue,urlcolor=blue,linkcolor=blue]{hyperref}
-\usepackage{wasysym}
-\usepackage{color}
-\usepackage[mathscr]{euscript}
+\documentclass[DM,authoryear,toc,lsstdraft]{lsstdoc}
+\usepackage[nonumberlist,nogroupskip,toc,numberedsection=autolabel]{glossaries}
 
-\graphicspath{{figures/}}
-\newcommand{\degree}{\ensuremath{^\circ}}
-\usepackage{siunitx}
-
-
-\begin{document}
+\input meta.tex
 
 \title{LSST Auxiliary Telescope observation strategy}
-
 \author{
 A.~Guyonnet
 }
 
-\institute{
-Department of Physics, Harvard University, 17 Oxford Street, Cambridge, MA 02138, USA
+\setDocRef{\lsstDocType-\lsstDocNum}
+\date{\vcsDate}
+
+
+\setDocAbstract{%
+LSST Auxiliary Telescope (A.T.) will supplement the survey photometric calibration with realtime atmospheric transmission monitoring. The A.T. is equipped with a low resolution spectrometer that will record dispersed images from stable natural celestial as they progress across the sky and back-light the atmosphere.
+This report presents a strategy to follow the atmospheric transparency variability at a few permil level from assimilating A.T. spectra with ancillary data. The dataset is used to feed a radiative transport simulation which delivers the atmospheric optical transmission.
 }
 
-\titlerunning{LSST Auxiliary Telescope observation strategy}
+\setDocChangeRecord{%
+  \addtohist{\vcsRevision}{\vcsDate}{Unreleased draft.}{Guyonnet}
+}
 
-\offprints{aguyonnet\@@fas.harvard.edu}
-
-%\date{November 23, 2017}
-
-\abstract{LSST Auxiliary Telescope (A.T.) will supplement the survey photometric calibration with realtime atmospheric transmission monitoring. The A.T. is equipped with a low resolution spectrometer that will record dispersed images from stable natural celestial as they progress across the sky and back-light the atmosphere. 
-  This report presents a strategy to follow the atmospheric transparency variability at a few permil level from assimilating A.T. spectra with ancillary data. The dataset is used to feed a radiative transport simulation which delivers the atmospheric optical transmission.}
+\begin{document}
 
 \maketitle
-
-
-\tableofcontents
-
-
 
 \section*{Introduction}
 
 This report describes the A.T. observation strategy to deliver a permil monitoring of the atmospheric transparency along the LSST line of sight. The method is to build a forward model of the atmospheric transmission from the determination of four parameters: the precipitable water Vaper (PWV), the Aerosol optical depth (AOD), the ozone column depth and the molecular scattering. Together, they fully constrain radiative transfer codes which have been shown to deliver reliable atmospheric transparency curves (Mayer and Kylling 2005, Obregon et al. 2015, Smette et al. 2015). 
 
 
-The parameters can be simultaneously determined from the fit of a single calibrated A.T. exposure. In practice, permil spectro-photometry has not been demonstrated yet and the single exposure solution remains partly degenerated with the telescope throughput uncertainties. A strategy that overcomes this limitation is to combine A.T. spectroscopy with data from global assimilation systems (\citealt{coughlin}). 
+The parameters can be simultaneously determined from the fit of a single calibrated A.T. exposure. In practice, permil spectro-photometry has not been demonstrated yet and the single exposure solution remains partly degenerated with the telescope throughput uncertainties. A strategy that overcomes this limitation is to combine A.T. spectroscopy with data from global assimilation systems \citep{2018SPIE10704E..20C}.
 
 Global assimilation systems routinely record variability of atmospheric constituents that translate into sub-percent variability of the atmospheric throughput. The avalanche of data from earth science experiments has been organized in a comprehensive manner by the Modern-Era Retrospective Analysis for Research and Applications, version 2 (MERRA-2)\footnote{\url{https://disc.sci.gsfc.nasa.gov/datasets?page=1&keywords=MERRA-2}}. This is the assimilation of satellites data from space agencies (NASA, ESA, Taiwan) as well as other external probes such as AERONET, aircrafts and cruise ships onboard instrumentation. Since the project is central for climate research, it has been under strong scrutiny and benefits from extensive analysis of consistency of the observations and the performance of assimilation methods (Randles et al. 2017 and references therein).
 
@@ -106,7 +83,7 @@ By examining the same stable target at two different airmasses $z_1$, $z_2$ on a
   \frac{S_{z1}(\lambda)}{S_{z2}(\lambda)}  =\frac{T_{atmo}^{z1}(\lambda)}{T_{atmo}^{z2}(\lambda)}.
   \label{obs}
 \end{equation}
-In addition, following equation 5 in \cite{buton},
+In addition, following equation 5 in \cite{2013A&A...549A...8B},
 \begin{equation}
 T_{atmo}^{z}(\lambda) = 10^{-0.4 K_{atmo}(\lambda, z)},
 \end{equation}
@@ -137,7 +114,7 @@ The two pillars of the observation plan are the stabilities of both the light so
 
 \subsection{Modern-Era Retrospective Analysis for Research and Applications, version 2 (MERRA-2)}
 
-Assimilating NASA MERRA-2 data for astronomy is innovative and relies on the validity of the interpolation: the accuracy of the local integration of the ozone column depth has been verified in several instances (\citealt{randles}). An uncertainty of $\sim 5$ Dobsons is expected, which translates into 1 mmmag/airmass for the ozone peak at 6000 Å. It can change overnight by 20 Dobsons (\citealt{buton}).
+Assimilating NASA MERRA-2 data for astronomy is innovative and relies on the validity of the interpolation: the accuracy of the local integration of the ozone column depth has been verified in several instances \citep{doi:10.1175/JCLI-D-16-0609.1}. An uncertainty of $\sim 5$ Dobsons is expected, which translates into 1 mmmag/airmass for the ozone peak at 6000 Å. It can change overnight by 20 Dobsons \citep{2013A&A...549A...8B}.
 
 The spatio-temporal interpolation of the barometric pressure and temperature profiles has been tested against measurements from weather balloons launched from Antofogasta Airport: using either dataset impacts the molecular scattering is below the 1‰ level. 
 
@@ -185,38 +162,12 @@ Table \ref{fig:im2} indicates the standard stars that have been routinely monito
 
 \begin{figure}
 \centering
-\includegraphics[width=0.6\linewidth]{snf_target.png}
-\caption{ List of the standard stars observed by the SNIF instrument mounted on the UH telescope and used by the SNfactory collaboration to monitor the atmospheric transmission (\citealt{buton}).
+\includegraphics[width=0.6\linewidth]{figures/snf_target.png}
+\caption{ List of the standard stars observed by the SNIF instrument mounted on the UH telescope and used by the SNfactory collaboration to monitor the atmospheric transmission \citep{2013A&A...549A...8B}.
 \label{fig:im2}
 }
 \end{figure}
 
-
-
-
-
-
-%% ----------------------------------------------------------------------
-\bibliographystyle{aa}
-\bibliography{biblio}
-% do : bibtex strategy.aux 
-%% ----------------------------------------------------------------------
-
-
-
-%\begin{figure}
-%\centering
-%\includegraphics[width=0.8\linewidth]{im1.png}
-%\caption{The atmospheric parameters needed to produce an atmospheric transmission curve from a radiative transfer simulation.   
-%\label{fig:im1}
-%}
-%\end{figure}
-
-
-
-
-
-
-
+\bibliography{lsst,lsst-dm,refs_ads,refs,books}
 
 \end{document}
