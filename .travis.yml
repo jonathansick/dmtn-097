@@ -1,0 +1,19 @@
+sudo: true
+dist: trusty
+services:
+  - docker
+language: python
+python:
+  - '3.5'
+before_install:
+  - "pip install 'lander>=0.1.0,<0.2'"
+script:
+  # Compile PDF using containerized lsst-texmf
+  - "docker run --rm -v `pwd`:/workspace -w /workspace lsstsqre/lsst-texmf:latest sh -c 'make'"
+  # Deploy website. See https://github.com/lsst-sqre/lander for CLI options
+  - lander --pdf DMTN-097.pdf --upload --env=travis --ltd-product dmtn-097 --title "LSST Auxiliary Telescope observation strategy" --handle DMTN-097
+env:
+  global:
+    # Add LSST the Docs credentials
+    - secure: "kV4rQX8ICAwVq//YbSu1cnHBNsc0rk5gkuxU9mufBoskuFcZNXom1g6zuSMy0B6Uz7CZrH53zSAe0fGspjTtjFQD7flHYVBSNTxnwc+8nPAUIXV8OT6cq0WxYm4QDy3k+pLG9npb5kPbU5m/DAF0OlLHoPk5gKFxexGs9C/gi0EH/euVC0dv/HkSM9VhLHDkXiQSq1/VabddaqFd1/kdV/jGjmlIbzA5oO/Z5VxdgBR247tf1/PF4VUrbM0EfvZX4bEwZCNSMt3Ty9ZMrDrScJaPidq6hSK1+sCjF8tsqblVCAKCCOsKOfHZarTUITiFY9cS0dlsO2ykyxtC9RLEj8lPmSRQcNTXxDW+fs7AJkL1/akpmQBqMpTHztR8N4b/tlsZkvJTiBgAMQUEcifKjtXUjThY2+6DTwvKP46oilIjvNiwPEeeF3JKyd/NJ406mRTHFDlE6zXBaNap02X2s+9paccC8I+FpRjQ6/0JmZfYEy0X+z9nr7u/wIOVR+PVIJuF0PY2ziHARvUbp4mHj7AFzFPM/0NRHnXVsxHaQdUoaHCz/XteTS8kpsqdH2Sb3S6/C1cF+kOWxi/rVwca5woOFfgLjO0vlRgAKB6Xz9oa26nBkwiSwP6VOvWmS/+OKp9QCqQggzunMqI+z/ofdZDQ8oHGUbLWBKuudPfshAY="
+    - secure: "F4pGH3CBm6Il1L2eXxUuJKoIyQ7rx4d9ftCyZ6/q2VpBeINYOCSnpsQZk0p1NpFzvmn64acLn7IMOSj0Z0mWzD7P9MbiPKNndy+M0fV1/Unn8fqauo07DHL+jvZ5JbCGGSDkbbN8wY2OXPrqh6xxi4aWIuFUhHoAU69RPc+G/t8/9HL2RKHgmr7V2Wa4MP9mdlT4Y/PSqVBAurDn9vXfZvrz3i/pYXKo7wRq6U8oSZ8UdB92nNDirQOEgH7j97qID/qjjdJm8XNGUwA7lGtmgNnNQr8lNCN9i1AL7NDriBKTCKhZb2vMWIzKVEx35daZQl85FSfGDwcwr9f8uwZysf4H5OYKo6sMet4atKFcFHBNn0XUTUICsHvM5APS6RKQa5igBK2FVoACT1NcIymyBzx1MDq+c+P9Hsbr4/BRxQMroqEF41PBaCpJh+HT5ESqtiIYtPY/aR1w+3CzIrWCBCibURhNkfawZT9kWf5k06yTzWSVOjY1NYxFGK9QgLYa+LWBrXFiCf97lQud5v8NxvQuXHi/v39Oe1ZW9iFhaNj+mIPvOdMMGOqAwIQy8OXqhNKDpB/gQkaxr63o5ga+0rhkA65jksFLYTzINFMTyGnTBRK2Gj9pYPDgXKC+B3ty3K4n+PV8VxNq4wgt/AQvX06QeSTUpHaV9ZTMc4E6bWg="
